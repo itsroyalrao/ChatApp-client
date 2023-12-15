@@ -17,7 +17,7 @@ function Homepage() {
         email={email}
       />
 
-      <div className="w-full min-h-screen flex">
+      <div className="w-full min-h-[100svh] flex">
         <div className="flex flex-col w-full sm:min-w-[250px] sm:w-[300px] lg:min-w-[25%] bg-[rgb(39,39,39)]">
           <div className="flex items-center justify-between p-2 font-bold text-2xl text-white bg-blue-900 shadow-sm shadow-indigo-100 sticky top-0">
             <div className="px-3 cursor-default">Onemate</div>

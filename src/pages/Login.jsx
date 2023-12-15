@@ -12,7 +12,7 @@ function Login() {
   }, []);
   return (
     <>
-      <div className="bg-[#242424] min-h-screen flex flex-col items-center justify-center">
+      <div className="bg-[#242424] min-h-[100svh] flex flex-col items-center justify-center">
         <div
           id="login-block"
           className="bg-blue-900 flex flex-col items-center px-4 rounded"
