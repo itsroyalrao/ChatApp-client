@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import GetName from "./GetName";
-import GetFriends from "./GetFriends";
-import MsgInput from "./MsgInput";
 import io from "socket.io-client";
-import ChatTemplate from "./ChatTemplate";
-import { getMessages } from "../../helper/messages";
+
+import GetName from "../components/GetName";
+import GetFriends from "../components/GetFriends";
+import MsgInput from "../components/MsgInput";
+import ChatTemplate from "../components/ChatTemplate";
+import { getMessages } from "../helper/messages";
 
 const socket = io.connect("http://localhost:3000");
 

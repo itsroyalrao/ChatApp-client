@@ -2,13 +2,13 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import "./index.css";
-import Login from "./pages/auth/Login.jsx";
-import Signup from "./pages/auth/Signup.jsx";
-import ResetPassword from "./pages/auth/ResetPassword";
-import ChangePassword from "./pages/auth/ChangePassword.jsx";
-import Homepage from "./pages/home/Homepage.jsx";
-import Profile from "./pages/home/Profile.jsx";
-import Chat from "./pages/home/chat";
+import Login from "./pages/Login.jsx";
+import Signup from "./pages/Signup.jsx";
+import ResetPassword from "./pages/ResetPassword.jsx";
+import ChangePassword from "./pages/ChangePassword.jsx";
+import Homepage from "./pages/Homepage.jsx";
+import Profile from "./pages/Profile.jsx";
+import Chat from "./pages/Chat.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Router>
