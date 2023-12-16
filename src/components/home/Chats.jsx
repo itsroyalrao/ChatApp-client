@@ -45,7 +45,6 @@ function Chats({ userChats, setUserChats }) {
           type="text"
           className="w-full p-3 bg-[#393939] rounded"
           placeholder="Type your message here..."
-          autoFocus
           value={inputMessage}
           onChange={(e) => setInputMessage(e.target.value)}
           onKeyDown={(e) => {
