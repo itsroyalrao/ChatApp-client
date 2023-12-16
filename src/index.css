@@ -3,5 +3,15 @@
 @tailwind utilities;
 
 body {
+  user-select: none;
   font-family: "Ubuntu", sans-serif;
+}
+
+.overflow-auto {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.overflow-auto::-webkit-scrollbar {
+  display: none;
 }

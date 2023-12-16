@@ -92,7 +92,7 @@ function Profile() {
             </div>
             <div className="flex space-x-4 my-auto">
               <Link
-                to={"/"}
+                to={"/login"}
                 className="bg-red-600 px-5 py-3 rounded-xl hover:scale-105"
               >
                 Yes

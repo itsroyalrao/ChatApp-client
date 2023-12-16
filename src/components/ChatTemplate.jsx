@@ -4,8 +4,6 @@ import MessageTemplate from "./MessageTemplate";
 
 const ChatTemplate = ({
   email,
-  profilebtnEnter,
-  profilebtnLeave,
   loading,
   friends,
   friendName,
@@ -30,8 +28,6 @@ const ChatTemplate = ({
                 src="/images/profile.png"
                 alt="Profile"
                 title="Profile"
-                onMouseEnter={() => profilebtnEnter()}
-                onMouseLeave={() => profilebtnLeave()}
               />
             </Link>
           </div>

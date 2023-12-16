@@ -58,7 +58,7 @@ function Signup() {
           </div>
           <div className="flex w-full py-3 text-sm text-white justify-center">
             <span className="">Already have an account? </span>
-            <Link className="px-2 underline sm:hover:scale-110" to={"/"}>
+            <Link className="px-2 underline sm:hover:scale-110" to={"/login"}>
               Login
             </Link>
           </div>

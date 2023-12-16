@@ -48,7 +48,7 @@ async function loginDetails(email, password, setMessage) {
         }
       );
       if (result.data.success) {
-        window.location.href = `/home?email=${email}`;
+        window.location.href = `/?email=${email}`;
       } else {
         setMessage(result.data.message);
       }

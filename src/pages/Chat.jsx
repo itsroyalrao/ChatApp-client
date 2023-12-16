@@ -3,12 +3,11 @@ import { useParams } from "react-router-dom";
 import io from "socket.io-client";
 
 import GetName from "../components/GetName";
-import GetFriends from "../components/GetFriends";
 import MsgInput from "../components/MsgInput";
 import ChatTemplate from "../components/ChatTemplate";
 import { getMessages } from "../helper/messages";
 
-const socket = io.connect("http://localhost:3000");
+const socket = io.connect("https://chatapp-4ixl.onrender.com");
 
 function Chat() {
   const { id, email } = useParams();
@@ -46,8 +45,6 @@ function Chat() {
       {friendName && <MsgInput friendName={friendName} />}
       <ChatTemplate
         email={email}
-        profilebtnEnter={profilebtnEnter}
-        profilebtnLeave={profilebtnLeave}
         loading={loading}
         friends={friends}
         friendName={friendName}
@@ -60,15 +57,5 @@ function Chat() {
     </>
   );
 }
-
-const profilebtnEnter = () => {
-  const profilebtn = document.getElementById("profilebtn");
-  profilebtn.src = "/images/profileonhover.png";
-};
-
-const profilebtnLeave = () => {
-  const profilebtn = document.getElementById("profilebtn");
-  profilebtn.src = "/images/profile.png";
-};
 
 export default Chat;
