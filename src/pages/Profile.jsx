@@ -8,21 +8,21 @@ function Profile() {
 
   const [data, setData] = useState(null);
 
-  useEffect(() => {
-    document.title = "Profile | Onemate";
-    const fetchUserDetails = async () => {
-      try {
-        const response = await axios.get(
-          `http://localhost:3000/profile?email=${email}`
-        );
-        setData({ name: response.data.name, email: response.data.email });
-      } catch (e) {
-        console.log(e);
-      }
-    };
+  // useEffect(() => {
+  //   document.title = "Profile | Onemate";
+  //   const fetchUserDetails = async () => {
+  //     try {
+  //       const response = await axios.get(
+  //         `http://localhost:3000/profile?email=${email}`
+  //       );
+  //       setData({ name: response.data.name, email: response.data.email });
+  //     } catch (e) {
+  //       console.log(e);
+  //     }
+  //   };
 
-    fetchUserDetails();
-  }, [email]);
+  //   fetchUserDetails();
+  // }, [email]);
   const [confimLogout, setConfirmLogout] = useState(false);
   return (
     <>
