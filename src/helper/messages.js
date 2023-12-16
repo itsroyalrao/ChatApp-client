@@ -1,8 +1,8 @@
 import axios from "axios";
 import io from "socket.io-client";
 
-// const socket = io.connect("https://chatapp-4ixl.onrender.com");
-const socket = io.connect("http://localhost:3000");
+const socket = io.connect("https://chatapp-4ixl.onrender.com");
+// const socket = io.connect("http://localhost:3000");
 
 socket.on("receive_message", (data) => {
   console.log("Message received from server", data);
@@ -22,15 +22,15 @@ async function postMessage(message, email, setUserMessages) {
 
 async function getMessages(email, setUserMessages) {
   const result = await axios.get(
-    `http://localhost:3000/chats?email=${email}`
-    // `https://chatapp-4ixl.onrender.com/chats?email=${email}`
+    // `http://localhost:3000/chats?email=${email}`
+    `https://chatapp-4ixl.onrender.com/chats?email=${email}`
   );
   if (result.data.success) setUserMessages(result.data.chats);
 }
 
 const sendMessage = (email, inputMessage, setInputMessage, setUserMessages) => {
   if (inputMessage) {
-    socket.emit("send_message", inputMessage);
+    socket.emit("send_message", [inputMessage, email]);
   }
   postMessage(inputMessage, email, setUserMessages);
   setInputMessage("");

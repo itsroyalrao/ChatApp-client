@@ -1,7 +1,20 @@
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
+import io from "socket.io-client";
+import { useEffect } from "react";
+
+const socket = io.connect("http://localhost:3000");
+
 function FriendsArea({ email, friends, setUserChats }) {
+  useEffect(() => {
+    socket.emit("add_yourself", email);
+
+    socket.on("room_joined", (data) => {
+      console.log("Message received from server", data);
+    });
+  }, [email]);
+
   return (
     <div className="flex flex-col w-full sm:min-w-[250px] sm:w-[300px] lg:min-w-[25%] bg-[#242424]">
       <div className="flex items-center justify-between p-2 font-bold text-2xl text-white bg-blue-700 sticky top-0">
@@ -20,9 +33,10 @@ function FriendsArea({ email, friends, setUserChats }) {
             <div key={friend.email}>
               <div
                 className="flex justify-center bg-[rgb(50,50,50)] p-3 text-xl cursor-pointer hover:bg-[#393939] capitalize"
-                onClick={() =>
-                  setUserChats({ username: friend.name, email: friend.email })
-                }
+                onClick={() => {
+                  socket.emit("join_room", { id: friend.email });
+                  setUserChats({ username: friend.name, email: friend.email });
+                }}
               >
                 {friend.name}
               </div>

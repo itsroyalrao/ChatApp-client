@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { getMessages, sendMessage } from "../../helper/messages";
 
-function Chats({ userChats }) {
+function Chats({ userChats, setUserChats }) {
   const [inputMessage, setInputMessage] = useState("");
   const [userMessages, setUserMessages] = useState(null);
 
@@ -12,8 +12,14 @@ function Chats({ userChats }) {
   }, [userChats.email]);
   return (
     <div className="flex flex-col grow bg-[#0F0F0F] overflow-auto">
-      <div className="w-full bg-[#242424] p-2 flex justify-center text-2xl capitalize">
-        {userChats.username}
+      <div className="w-full bg-[#242424] p-2 flex items-center capitalize">
+        <i
+          className="fas fa-arrow-left text-xl cursor-pointer"
+          onClick={() => setUserChats(null)}
+        ></i>
+        <div className="grow flex justify-center text-2xl">
+          {userChats.username}
+        </div>
       </div>
       <div className="grow overflow-auto">
         <div className="h-full overflow-auto">
@@ -59,7 +65,7 @@ function Chats({ userChats }) {
 
 Chats.propTypes = {
   userChats: PropTypes.object,
-  email: PropTypes.string,
+  setUserChats: PropTypes.func,
 };
 
 export default Chats;

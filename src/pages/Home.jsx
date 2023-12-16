@@ -30,7 +30,7 @@ function Homepage() {
             setUserChats={setUserChats}
           />
           {userChats ? (
-            <Chats email={email} userChats={userChats} />
+            <Chats userChats={userChats} setUserChats={setUserChats} />
           ) : (
             <div className="grow flex flex-col items-center justify-center bg-[#0F0F0F]">
               <div className="p-4 pt-0 rounded-lg text-2xl">
@@ -43,7 +43,7 @@ function Homepage() {
         <>
           {userChats ? (
             <div className="w-full h-[100svh] flex text-white">
-              <Chats userChats={userChats} />
+              <Chats userChats={userChats} setUserChats={setUserChats} />
             </div>
           ) : (
             <div className="w-full min-h-[100svh] flex text-white">
