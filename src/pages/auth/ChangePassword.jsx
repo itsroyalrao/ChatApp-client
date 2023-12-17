@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { changePassword } from "../helper/auth";
+import { changePassword } from "../../helper/auth";
 
 function ChangePassword() {
   const location = useLocation();

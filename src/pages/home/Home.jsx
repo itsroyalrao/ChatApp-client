@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import FriendsArea from "../components/home/FriendsArea";
-import { getUsers } from "../helper/home";
-import Chats from "../components/home/Chats";
+import FriendsArea from "../../components/home/FriendsArea";
+import { getUsers } from "../../helper/home";
+import Chats from "../../components/home/Chats";
 
 function Homepage() {
   window.onresize = function () {

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { signupDetails } from "../helper/auth";
+import { signupDetails } from "../../helper/auth";
 
 function Signup() {
   const [message, setMessage] = useState(null);

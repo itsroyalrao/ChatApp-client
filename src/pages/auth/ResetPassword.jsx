@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { resetPassword } from "../helper/auth";
+import { resetPassword } from "../../helper/auth";
 
 function ResetPassword() {
   const [message, setMessage] = useState(null);
