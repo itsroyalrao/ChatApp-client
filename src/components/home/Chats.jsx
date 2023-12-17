@@ -1,15 +1,31 @@
 import PropTypes from "prop-types";
-import { useEffect, useState } from "react";
-import { getMessages, sendMessage } from "../../helper/messages";
+import io from "socket.io-client";
+import { useEffect, useRef, useState } from "react";
+import { getMessages, getRoomID, sendMessage } from "../../helper/messages";
+
+// const socket = io.connect("http://localhost:3000");
+const socket = io.connect("https://chatapp-4ixl.onrender.com");
 
 function Chats({ userChats, setUserChats }) {
   const [inputMessage, setInputMessage] = useState("");
   const [userMessages, setUserMessages] = useState(null);
+  const [roomID, setRoomID] = useState(null);
+
+  const refToLastMessage = useRef(null);
+
+  socket.on("receive_message", async () => {
+    await getMessages(roomID, setUserMessages);
+  });
 
   useEffect(() => {
     setUserMessages(null);
-    getMessages(userChats.email, setUserMessages);
-  }, [userChats.email]);
+    getRoomID(userChats.email, setRoomID);
+    if (roomID) getMessages(roomID, setUserMessages);
+  }, [userChats.email, roomID]);
+
+  useEffect(() => {
+    refToLastMessage.current?.scrollIntoView();
+  }, [userMessages]);
   return (
     <div className="flex flex-col grow bg-[#0F0F0F] overflow-auto">
       <div className="w-full bg-[#242424] p-2 flex items-center capitalize">
@@ -32,6 +48,7 @@ function Chats({ userChats, setUserChats }) {
                   </div>
                 </div>
               ))}
+              <div ref={refToLastMessage}></div>
             </div>
           ) : (
             <div className="h-full flex justify-center items-center text-2xl">
@@ -48,13 +65,10 @@ function Chats({ userChats, setUserChats }) {
           value={inputMessage}
           onChange={(e) => setInputMessage(e.target.value)}
           onKeyDown={(e) => {
-            if (e.key === "Enter")
-              sendMessage(
-                userChats.email,
-                inputMessage,
-                setInputMessage,
-                setUserMessages
-              );
+            if (e.key === "Enter" && roomID) {
+              sendMessage(roomID, inputMessage, setUserMessages, socket);
+              setInputMessage("");
+            }
           }}
         />
       </div>

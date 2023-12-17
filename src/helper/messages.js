@@ -1,43 +1,46 @@
 import axios from "axios";
-import io from "socket.io-client";
 
-const socket = io.connect("http://localhost:3000");
-// const socket = io.connect("https://chatapp-4ixl.onrender.com");
-
-socket.on("receive_message", (data) => {
-  console.log("Message received from server", data);
-});
-
-async function postMessage(message, friend, setUserMessages) {
-  const email = localStorage.getItem("email");
-  const response = await axios.post(
-    "http://localhost:3000/chats",
-    // "https://chatapp-4ixl.onrender.com/chats",
+async function postMessage(message, roomID, setUserMessages) {
+  await axios.post(
+    // "http://localhost:3000/chats",
+    "https://chatapp-4ixl.onrender.com/chats",
     {
       message: message,
-      friend: friend,
-      email: email,
+      roomID,
     }
   );
-  console.log(response);
-  getMessages(email, setUserMessages);
+  getMessages(roomID, setUserMessages);
 }
 
-async function getMessages(email, setUserMessages) {
-  const result = await axios.get(
-    `http://localhost:3000/chats?email=${email}`
-    // `https://chatapp-4ixl.onrender.com/chats?email=${email}`
+async function getMessages(roomID, setUserMessages) {
+  const response = await axios.get(
+    // `http://localhost:3000/chats?roomID=${roomID}`
+    `https://chatapp-4ixl.onrender.com/chats?roomID=${roomID}`
   );
-  if (result.data.success) setUserMessages(result.data.chats);
+  if (response.data.success) {
+    setUserMessages(response.data.chats);
+  }
 }
 
-const sendMessage = (email, inputMessage, setInputMessage, setUserMessages) => {
+async function getRoomID(friend, setRoomID) {
+  const email = localStorage.getItem("email");
+
+  const response = await axios.post(
+    // `http://localhost:3000/chats/room`,
+    `https://chatapp-4ixl.onrender.com/chats/room`,
+    {
+      email,
+      friend,
+    }
+  );
+  if (response.data.success) setRoomID(response.data.roomID);
+}
+
+const sendMessage = (roomID, inputMessage, setUserMessages, socket) => {
   if (inputMessage) {
-    socket.emit("send_message", [inputMessage, email]);
+    socket.emit("send_message", [inputMessage, roomID]);
+    postMessage(inputMessage, roomID, setUserMessages);
   }
-  postMessage(inputMessage, email, setUserMessages);
-  setInputMessage("");
-  getMessages(setUserMessages);
 };
 
-export { postMessage, getMessages, sendMessage };
+export { postMessage, getMessages, getRoomID, sendMessage };

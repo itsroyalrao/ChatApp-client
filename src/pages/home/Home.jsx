@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import FriendsArea from "../../components/home/FriendsArea";
-import { getUsers } from "../../helper/home";
+import { getUsers } from "../../helper/friends";
 import Chats from "../../components/home/Chats";
 
 function Homepage() {
