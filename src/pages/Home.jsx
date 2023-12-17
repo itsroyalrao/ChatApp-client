@@ -1,24 +1,25 @@
 import { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
 import FriendsArea from "../components/home/FriendsArea";
 import { getUsers } from "../helper/home";
 import Chats from "../components/home/Chats";
 
 function Homepage() {
-  const location = useLocation();
-  const email = new URLSearchParams(location.search).get("email");
-
   window.onresize = function () {
     setWindowWidth(window.innerWidth);
   };
 
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [email, setEmail] = useState(null);
   const [friends, setFriends] = useState(null);
   const [userChats, setUserChats] = useState(null);
 
   useEffect(() => {
-    getUsers(email, setFriends);
-  }, [email]);
+    const email = localStorage.getItem("email");
+    if (email) {
+      setEmail(email);
+      getUsers(email, setFriends);
+    } else window.location.href = "/login";
+  }, []);
 
   return (
     <>

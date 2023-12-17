@@ -18,8 +18,8 @@ async function signupDetails(
         password,
       };
       const result = await axios.post(
-        // "http://localhost:3000/auth/signup",
-        "https://chatapp-4ixl.onrender.com/auth/signup",
+        "http://localhost:3000/auth/signup",
+        // "https://chatapp-4ixl.onrender.com/auth/signup",
         userDetails
       );
       if (result.data.success) window.location.href = "/";
@@ -40,15 +40,16 @@ async function loginDetails(email, password, setMessage) {
     else if (!password) setMessage("Password is required");
     else {
       const result = await axios.post(
-        // "http://localhost:3000/auth/login",
-        "https://chatapp-4ixl.onrender.com/auth/login",
+        "http://localhost:3000/auth/login",
+        // "https://chatapp-4ixl.onrender.com/auth/login",
         {
           email,
           password,
         }
       );
       if (result.data.success) {
-        window.location.href = `/?email=${email}`;
+        localStorage.setItem("email", email);
+        window.location.href = `/`;
       } else {
         setMessage(result.data.message);
       }
@@ -63,8 +64,8 @@ const resetPassword = async (email, setMessage) => {
     if (email === "") setMessage("Please provide email");
     else {
       const response = await axios.post(
-        // "http://localhost:3000/auth/resetPassword",
-        "https://chatapp-4ixl.onrender.com/resetPassword",
+        "http://localhost:3000/auth/resetPassword",
+        // "https://chatapp-4ixl.onrender.com/resetPassword",
         { email }
       );
 
@@ -90,8 +91,8 @@ const changePassword = async (
       setMessage("Password do not match");
     else {
       const response = await axios.post(
-        // "http://localhost:3000/auth/changePassword",
-        "https://chatapp-4ixl.onrender.com/changePassword",
+        "http://localhost:3000/auth/changePassword",
+        // "https://chatapp-4ixl.onrender.com/changePassword",
         {
           email,
           newPassword,

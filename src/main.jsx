@@ -8,7 +8,6 @@ import ResetPassword from "./pages/ResetPassword.jsx";
 import ChangePassword from "./pages/ChangePassword.jsx";
 import Homepage from "./pages/Home.jsx";
 import Profile from "./pages/Profile.jsx";
-import Chat from "./pages/Chat.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Router>
@@ -19,7 +18,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <Route path="/changePassword" element={<ChangePassword />} />
       <Route path="/" element={<Homepage />} />
       <Route path="/profile" element={<Profile />} />
-      <Route path="/chat/:email/:id" element={<Chat />} />
     </Routes>
   </Router>
 );

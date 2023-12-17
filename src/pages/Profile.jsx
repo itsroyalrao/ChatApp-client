@@ -76,6 +76,7 @@ function Profile() {
           <div
             className="bg-red-600 hover:scale-105 px-4 py-2 rounded-lg cursor-pointer text-white text-2xl"
             onClick={() => {
+              localStorage.clear();
               setConfirmLogout(true);
 
               const block = document.getElementById("profile-block");
