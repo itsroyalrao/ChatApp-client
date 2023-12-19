@@ -10,7 +10,7 @@ import Homepage from "./pages/home/Home.jsx";
 import Profile from "./pages/home/Profile.jsx";
 import axios from "axios";
 
-axios.defaults.withCredentials = true
+axios.defaults.withCredentials = true;
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Router>

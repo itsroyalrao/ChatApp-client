@@ -8,7 +8,7 @@ function FriendsArea({ email, friends, setUserChats }) {
         <div className="px-3 cursor-default">Onemate</div>
         <div className="flex items-center">
           <Link
-            to={`/profile?email=${email}`}
+            to={`/profile`}
             className="fas fa-user px-1"
             title="Profile"
           ></Link>
