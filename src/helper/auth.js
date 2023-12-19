@@ -147,6 +147,7 @@ const getUsers = async (email, setFriends) => {
       `https://chatapp-4ixl.onrender.com/home?email=${email}`
     );
     if (response.data.success) setFriends(response.data.users);
+    else setFriends(false);
   } catch (e) {
     console.log(e);
   }

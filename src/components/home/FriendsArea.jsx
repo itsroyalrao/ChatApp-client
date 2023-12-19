@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
-function FriendsArea({ email, friends, setUserChats }) {
+function FriendsArea({ friends, setUserChats }) {
   return (
     <div className="flex flex-col w-full sm:min-w-[250px] sm:w-[300px] lg:min-w-[25%] bg-[#242424]">
       <div className="flex items-center justify-between p-2 font-bold text-2xl text-white bg-blue-700 sticky top-0">
@@ -46,8 +46,7 @@ function FriendsArea({ email, friends, setUserChats }) {
 }
 
 FriendsArea.propTypes = {
-  email: PropTypes.string,
-  friends: PropTypes.array,
+  friends: PropTypes.any,
   setUserChats: PropTypes.func,
 };
 
