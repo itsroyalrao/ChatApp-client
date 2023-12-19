@@ -12,7 +12,7 @@ const setCookies = async (email, navigate) => {
   }
 };
 
-const isAuthorized = async (navigate, setEmail, setFriends) => {
+const isAuthorized = async (navigate, setEmail) => {
   const cookies = {};
   document.cookie.split("; ").forEach((cookie) => {
     const temp = cookie.split("=");
@@ -26,7 +26,6 @@ const isAuthorized = async (navigate, setEmail, setFriends) => {
   );
   if (response.data.success) {
     setEmail(response.data.email);
-    getUsers(response.data.email, setFriends);
   } else {
     navigate("/login");
   }
@@ -160,4 +159,5 @@ export {
   loginDetails,
   resetPassword,
   changePassword,
+  getUsers,
 };

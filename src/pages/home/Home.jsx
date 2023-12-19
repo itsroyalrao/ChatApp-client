@@ -1,8 +1,9 @@
+// import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import FriendsArea from "../../components/home/FriendsArea";
 import Chats from "../../components/home/Chats";
 import { useNavigate } from "react-router-dom";
-import { isAuthorized } from "../../helper/auth";
+import { getUsers, isAuthorized } from "../../helper/auth";
 
 function Homepage() {
   window.onresize = function () {
@@ -10,15 +11,16 @@ function Homepage() {
   };
 
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const [email, setEmail] = useState(null);
   const [friends, setFriends] = useState(null);
   const [userChats, setUserChats] = useState(null);
+  let [email, setEmail] = useState(null);
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    isAuthorized(navigate, setEmail, setFriends);
-  }, [navigate]);
+    isAuthorized(navigate, setEmail);
+    if (email) getUsers(email, setFriends);
+  }, [navigate, email]);
 
   return (
     <>
@@ -75,5 +77,7 @@ function Homepage() {
     </>
   );
 }
+
+// Homepage.propTypes = {};
 
 export default Homepage;

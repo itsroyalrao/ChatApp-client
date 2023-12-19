@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { loginDetails } from "../../helper/auth";
+import { isAuthorized, loginDetails } from "../../helper/auth";
 
 function Login() {
   const [message, setMessage] = useState(null);
@@ -10,6 +10,7 @@ function Login() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    isAuthorized(navigate, setEmail);
     document.title = "Login | ChatApp";
   }, []);
   return (
