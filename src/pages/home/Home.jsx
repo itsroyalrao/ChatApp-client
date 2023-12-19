@@ -22,7 +22,7 @@ function Homepage() {
 
   return (
     <>
-      {email && (
+      {email ? (
         <>
           {windowWidth >= 640 ? (
             <div className="w-full h-[100svh] flex text-white">
@@ -67,6 +67,10 @@ function Homepage() {
             </>
           )}
         </>
+      ) : (
+        <div className="flex justify-center items-center h-[100svh] bg-[#242424] text-white text-xl">
+          Loading...
+        </div>
       )}
     </>
   );
