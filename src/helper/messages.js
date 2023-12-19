@@ -1,7 +1,7 @@
 import axios from "axios";
 
 async function postMessage(message, roomID, setUserMessages) {
-  await axios.post(
+  const response = await axios.post(
     // "http://localhost:3000/chats",
     "https://chatapp-4ixl.onrender.com/chats",
     {
@@ -9,6 +9,7 @@ async function postMessage(message, roomID, setUserMessages) {
       roomID,
     }
   );
+  console.log(response);
   getMessages(roomID, setUserMessages);
 }
 
@@ -22,9 +23,7 @@ async function getMessages(roomID, setUserMessages) {
   }
 }
 
-async function getRoomID(friend, setRoomID) {
-  const email = localStorage.getItem("email");
-
+async function getRoomID(email, friend, setRoomID) {
   const response = await axios.post(
     // `http://localhost:3000/chats/room`,
     `https://chatapp-4ixl.onrender.com/chats/room`,

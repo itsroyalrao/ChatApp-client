@@ -8,6 +8,9 @@ import ResetPassword from "./pages/auth/ResetPassword.jsx";
 import ChangePassword from "./pages/auth/ChangePassword.jsx";
 import Homepage from "./pages/home/Home.jsx";
 import Profile from "./pages/home/Profile.jsx";
+import axios from "axios";
+
+axios.defaults.withCredentials = true
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Router>

@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { loginDetails } from "../../helper/auth";
 
 function Login() {
   const [message, setMessage] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     document.title = "Login | ChatApp";
@@ -52,7 +54,7 @@ function Login() {
         </div>
         <div
           className="bg-blue-900 w-40 rounded-b flex items-center justify-center text-white p-2 cursor-pointer sm:hover:bg-white sm:hover:text-blue-900 sm:hover:font-bold"
-          onClick={() => loginDetails(email, password, setMessage)}
+          onClick={() => loginDetails(email, password, setMessage, navigate)}
         >
           Login
         </div>

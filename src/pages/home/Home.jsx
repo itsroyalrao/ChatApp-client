@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import FriendsArea from "../../components/home/FriendsArea";
-import { getUsers } from "../../helper/friends";
 import Chats from "../../components/home/Chats";
+import { useNavigate } from "react-router-dom";
+import { isAuthorized } from "../../helper/auth";
 
 function Homepage() {
   window.onresize = function () {
@@ -13,47 +14,57 @@ function Homepage() {
   const [friends, setFriends] = useState(null);
   const [userChats, setUserChats] = useState(null);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
-    const email = localStorage.getItem("email");
-    if (email) {
-      setEmail(email);
-      getUsers(email, setFriends);
-    } else window.location.href = "/login";
-  }, []);
+    isAuthorized(navigate, setEmail, setFriends);
+  }, [navigate]);
 
   return (
     <>
-      {windowWidth >= 640 ? (
-        <div className="w-full h-[100svh] flex text-white">
-          <FriendsArea
-            email={email}
-            friends={friends}
-            setUserChats={setUserChats}
-          />
-          {userChats ? (
-            <Chats userChats={userChats} setUserChats={setUserChats} />
-          ) : (
-            <div className="grow flex flex-col items-center justify-center bg-[#0F0F0F]">
-              <div className="p-4 pt-0 rounded-lg text-2xl">
-                Click on a chat to start messaging
-              </div>
-            </div>
-          )}
-        </div>
-      ) : (
+      {email && (
         <>
-          {userChats ? (
+          {windowWidth >= 640 ? (
             <div className="w-full h-[100svh] flex text-white">
-              <Chats userChats={userChats} setUserChats={setUserChats} />
-            </div>
-          ) : (
-            <div className="w-full min-h-[100svh] flex text-white">
               <FriendsArea
                 email={email}
                 friends={friends}
                 setUserChats={setUserChats}
               />
+              {userChats ? (
+                <Chats
+                  email={email}
+                  userChats={userChats}
+                  setUserChats={setUserChats}
+                />
+              ) : (
+                <div className="grow flex flex-col items-center justify-center bg-[#0F0F0F]">
+                  <div className="p-4 pt-0 rounded-lg text-2xl">
+                    Click on a chat to start messaging
+                  </div>
+                </div>
+              )}
             </div>
+          ) : (
+            <>
+              {userChats ? (
+                <div className="w-full h-[100svh] flex text-white">
+                  <Chats
+                    email={email}
+                    userChats={userChats}
+                    setUserChats={setUserChats}
+                  />
+                </div>
+              ) : (
+                <div className="w-full min-h-[100svh] flex text-white">
+                  <FriendsArea
+                    email={email}
+                    friends={friends}
+                    setUserChats={setUserChats}
+                  />
+                </div>
+              )}
+            </>
           )}
         </>
       )}

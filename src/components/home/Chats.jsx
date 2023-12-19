@@ -6,7 +6,7 @@ import { getMessages, getRoomID, sendMessage } from "../../helper/messages";
 // const socket = io.connect("http://localhost:3000");
 const socket = io.connect("https://chatapp-4ixl.onrender.com");
 
-function Chats({ userChats, setUserChats }) {
+function Chats({ email, userChats, setUserChats }) {
   const [inputMessage, setInputMessage] = useState("");
   const [userMessages, setUserMessages] = useState(null);
   const [roomID, setRoomID] = useState(null);
@@ -19,9 +19,9 @@ function Chats({ userChats, setUserChats }) {
 
   useEffect(() => {
     setUserMessages(null);
-    getRoomID(userChats.email, setRoomID);
+    getRoomID(email, userChats.email, setRoomID);
     if (roomID) getMessages(roomID, setUserMessages);
-  }, [userChats.email, roomID]);
+  }, [email, userChats.email, roomID]);
 
   useEffect(() => {
     refToLastMessage.current?.scrollIntoView();
@@ -77,6 +77,7 @@ function Chats({ userChats, setUserChats }) {
 }
 
 Chats.propTypes = {
+  email: PropTypes.string,
   userChats: PropTypes.object,
   setUserChats: PropTypes.func,
 };
