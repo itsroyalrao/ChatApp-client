@@ -13,7 +13,7 @@ function Homepage() {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [friends, setFriends] = useState(null);
   const [userChats, setUserChats] = useState(null);
-  let [email, setEmail] = useState(null);
+  const [email, setEmail] = useState(null);
 
   const navigate = useNavigate();
 
