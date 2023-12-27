@@ -17,7 +17,7 @@ const isAuthorized = async (navigate, setEmail) => {
     cookies[temp[0]] = temp[1];
   });
 
-  const response = await axios.post(`${baseURI()}/cookies`, cookies);
+  const response = await axios.post(`${baseURI()}/home/cookies`, cookies);
   if (response.data.success) {
     setEmail(response.data.email);
   } else {
