@@ -8,12 +8,9 @@ import ChangePassword from "./pages/auth/ChangePassword.jsx";
 import Homepage from "./pages/home/Home.jsx";
 import Profile from "./pages/home/Profile.jsx";
 import axios from "axios";
-import { useEffect } from "react";
 
 function App() {
-  useEffect(() => {
-    axios.defaults.withCredentials = true;
-  }, []);
+  axios.defaults.withCredentials = true;
   return (
     <>
       <Router>
