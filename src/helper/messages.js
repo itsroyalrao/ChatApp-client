@@ -1,37 +1,27 @@
 import axios from "axios";
+import { baseURI } from "./baseURI";
 
 async function postMessage(message, roomID, setUserMessages) {
-  const response = await axios.post(
-    // "http://localhost:3000/chats",
-    "https://chatapp-4ixl.onrender.com/chats",
-    {
-      message: message,
-      roomID,
-    }
-  );
+  const response = await axios.post(`${baseURI()}/chats`, {
+    message: message,
+    roomID,
+  });
   console.log(response);
   getMessages(roomID, setUserMessages);
 }
 
 async function getMessages(roomID, setUserMessages) {
-  const response = await axios.get(
-    // `http://localhost:3000/chats?roomID=${roomID}`
-    `https://chatapp-4ixl.onrender.com/chats?roomID=${roomID}`
-  );
+  const response = await axios.get(`${baseURI()}/chats?roomID=${roomID}`);
   if (response.data.success) {
     setUserMessages(response.data.chats);
   }
 }
 
 async function getRoomID(email, friend, setRoomID) {
-  const response = await axios.post(
-    // `http://localhost:3000/chats/room`,
-    `https://chatapp-4ixl.onrender.com/chats/room`,
-    {
-      email,
-      friend,
-    }
-  );
+  const response = await axios.post(`${baseURI()}/chats/room`, {
+    email,
+    friend,
+  });
   if (response.data.success) setRoomID(response.data.roomID);
 }
 

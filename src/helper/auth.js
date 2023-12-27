@@ -1,10 +1,8 @@
 import axios from "axios";
+import { baseURI } from "./baseURI";
 
 const setCookies = async (email, navigate) => {
-  const response = await axios.get(
-    // `http://localhost:3000/auth/cookies?email=${email}`
-    `https://chatapp-4ixl.onrender.com/auth/cookies?email=${email}`
-  );
+  const response = await axios.get(`${baseURI()}/auth/cookies?email=${email}`);
   if (response.data.success) {
     document.cookie = `accessToken=${response.data.tokens.accessToken}`;
     document.cookie = `refreshToken=${response.data.tokens.refreshToken}`;
@@ -19,11 +17,7 @@ const isAuthorized = async (navigate, setEmail) => {
     cookies[temp[0]] = temp[1];
   });
 
-  const response = await axios.post(
-    // "http://localhost:3000/home/cookies",
-    "https://chatapp-4ixl.onrender.com/home/cookies",
-    cookies
-  );
+  const response = await axios.post(`${baseURI()}/cookies`, cookies);
   if (response.data.success) {
     setEmail(response.data.email);
   } else {
@@ -48,11 +42,7 @@ async function signupDetails(
         email,
         password,
       };
-      const result = await axios.post(
-        // "http://localhost:3000/auth/signup",
-        "https://chatapp-4ixl.onrender.com/auth/signup",
-        userDetails
-      );
+      const result = await axios.post(`${baseURI()}/auth/signup`, userDetails);
       if (result.data.success) window.location.href = "/";
       else {
         setMessage(result.data.message);
@@ -70,14 +60,10 @@ async function loginDetails(email, password, setMessage, navigate) {
     if (!email) setMessage("Please enter your email");
     else if (!password) setMessage("Password is required");
     else {
-      const result = await axios.post(
-        // "http://localhost:3000/auth/login",
-        "https://chatapp-4ixl.onrender.com/auth/login",
-        {
-          email,
-          password,
-        }
-      );
+      const result = await axios.post(`${baseURI()}/auth/login`, {
+        email,
+        password,
+      });
       if (result.data.success) {
         await setCookies(email, navigate);
       } else {
@@ -93,11 +79,9 @@ const resetPassword = async (email, setMessage) => {
   try {
     if (email === "") setMessage("Please provide email");
     else {
-      const response = await axios.post(
-        // "http://localhost:3000/auth/resetPassword",
-        "https://chatapp-4ixl.onrender.com/resetPassword",
-        { email }
-      );
+      const response = await axios.post(`${baseURI()}/resetPassword`, {
+        email,
+      });
 
       if (response.data.success) setMessage(response.data.msg, true);
       else setMessage(response.data.msg, false);
@@ -120,14 +104,10 @@ const changePassword = async (
     else if (newPassword !== confirmNewPassword)
       setMessage("Password do not match");
     else {
-      const response = await axios.post(
-        // "http://localhost:3000/auth/changePassword",
-        "https://chatapp-4ixl.onrender.com/changePassword",
-        {
-          email,
-          newPassword,
-        }
-      );
+      const response = await axios.post(`${baseURI()}/changePassword`, {
+        email,
+        newPassword,
+      });
       if (response.data.success) {
         setMessage(response.data.msg, true);
         setTimeout(() => {
@@ -142,10 +122,7 @@ const changePassword = async (
 
 const getUsers = async (email, setFriends) => {
   try {
-    const response = await axios.get(
-      // `http://localhost:3000/home?email=${email}`
-      `https://chatapp-4ixl.onrender.com/home?email=${email}`
-    );
+    const response = await axios.get(`${baseURI()}/home?email=${email}`);
     if (response.data.success) setFriends(response.data.users);
     else setFriends(false);
   } catch (e) {
