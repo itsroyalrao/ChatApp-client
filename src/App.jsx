@@ -7,10 +7,10 @@ import ResetPassword from "./pages/auth/ResetPassword.jsx";
 import ChangePassword from "./pages/auth/ChangePassword.jsx";
 import Homepage from "./pages/home/Home.jsx";
 import Profile from "./pages/home/Profile.jsx";
-import axios from "axios";
+// import axios from "axios";
 
 function App() {
-  axios.defaults.withCredentials = true;
+  // axios.defaults.withCredentials = true;
   return (
     <>
       <Router>
